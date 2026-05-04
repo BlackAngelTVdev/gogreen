@@ -2,14 +2,31 @@ const form = document.getElementById("commit-form");
 const status = document.getElementById("status");
 const output = document.getElementById("output");
 const submit = document.getElementById("submit");
+const useDefaultRepo = document.getElementById("useDefaultRepo");
 const repoUrl = document.getElementById("repoUrl");
 const startDay = document.getElementById("startDay");
 const endDay = document.getElementById("endDay");
 
 const today = new Date().toISOString().slice(0, 10);
-repoUrl.value = "";
+const defaultRepoUrl = "https://github.com/BlackAngelTVdev/gogreen.git";
+repoUrl.value = defaultRepoUrl;
 startDay.value = today;
 endDay.value = today;
+
+function syncRepoField() {
+  repoUrl.readOnly = useDefaultRepo.checked;
+  repoUrl.value = useDefaultRepo.checked ? defaultRepoUrl : repoUrl.value.trim();
+}
+
+syncRepoField();
+
+useDefaultRepo.addEventListener("change", () => {
+  if (useDefaultRepo.checked && !repoUrl.value.trim()) {
+    repoUrl.value = defaultRepoUrl;
+  }
+
+  syncRepoField();
+});
 
 startDay.addEventListener("change", () => {
   if (endDay.value < startDay.value) {
@@ -30,7 +47,7 @@ form.addEventListener("submit", async (event) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        repoUrl: repoUrl.value,
+        repoUrl: repoUrl.value.trim(),
         startDay: startDay.value,
         endDay: endDay.value,
         count: Number(document.getElementById("count").value),

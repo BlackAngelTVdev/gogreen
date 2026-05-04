@@ -72,16 +72,9 @@
         line-height: 1.6;
       }
 
-      .grid {
+      .layout {
         display: grid;
-        grid-template-columns: 1.1fr 0.9fr;
         gap: 18px;
-      }
-
-      @media (max-width: 860px) {
-        .grid {
-          grid-template-columns: 1fr;
-        }
       }
 
       .card {
@@ -193,12 +186,17 @@
         </p>
       </div>
 
-      <section class="grid">
+      <section class="layout">
         <form class="card form-card" id="commit-form">
           <div class="form-grid">
             <label>
+              <span>Oui, je veux fake sur ce repo-là</span>
+              <input id="useDefaultRepo" name="useDefaultRepo" type="checkbox" checked />
+            </label>
+
+            <label>
               URL du dépôt
-              <input id="repoUrl" name="repoUrl" type="text" placeholder="https://github.com/user/repo.git" required />
+              <input id="repoUrl" name="repoUrl" type="text" value="https://github.com/BlackAngelTVdev/gogreen.git" placeholder="https://github.com/user/repo.git" required />
             </label>
 
             <label>
@@ -233,7 +231,7 @@
         </form>
 
         <aside class="card side-card">
-          <h2>Résultat</h2>
+          <h2>Graphe / Résultat</h2>
           <p class="hint">La réponse du serveur apparaît ici après génération.</p>
           <pre id="output">{}</pre>
         </aside>

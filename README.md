@@ -30,6 +30,8 @@ npm run start
 4. **Open**
 Go to `http://localhost:3000` in your browser and choose a start date, an end date, and a commit count.
 
+The interface can prefill `https://github.com/BlackAngelTVdev/gogreen.git` when you want to use the built-in target repo shortcut.
+
 ### Architecture
 
 - The front-end is static in `public/index.html` and `public/app.js`.
@@ -58,4 +60,5 @@ Huge thanks to [Akshay Saini](https://github.com/akshaymarch7) for the original 
 
 
 Thank you to everyone who contributes to the project.
+
 [![Contributors](https://contrib.rocks/image?repo=BlackAngelTVdev/gogreen)](https://github.com/BlackAngelTVdev/gogreen/graphs/contributors)
