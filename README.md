@@ -55,3 +55,7 @@ Go to `http://localhost:3000` in your browser and choose a start date, an end da
 ## Credits
 
 Huge thanks to [Akshay Saini](https://github.com/akshaymarch7) for the original video behind this project.
+
+
+Thank you to everyone who contributes to the project.
+[![Contributors](https://contrib.rocks/image?repo=BlackAngelTVdev/gogreen)](https://github.com/BlackAngelTVdev/gogreen/graphs/contributors)
