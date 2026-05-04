@@ -1,7 +1,7 @@
 {
   "name": "gogreen",
   "version": "1.0.0",
-  "description": "nice dream",
+  "description": "Small local web app to create git commits on a chosen date range.",
   "main": "index.js",
   "type": "module",
   "scripts": {
@@ -14,7 +14,7 @@
   "dependencies": {
     "jsonfile": "^6.1.0",
     "moment": "^2.30.1",
-    "random": "^4.1.0",
+    "nodemon": "^3.1.14",
     "simple-git": "^3.36.0"
   },
   "repository": {

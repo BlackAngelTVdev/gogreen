@@ -1,11 +1,11 @@
 # 🌱 goGreen
 
 With **goGreen**, you can make your profile look like you've been hard at work... even if you haven't.
-NodeJs script to make commits to the past (or the future) to go green on GitHub.
+NodeJs web app to make commits in a chosen date range and go green on GitHub.
 
 ## About
 
-**goGreen** helps you create commits on your GitHub profile for any date in the past. Whether you want to fill up your contribution graph or even make cool patterns and artwork.
+**goGreen** helps you create commits on your GitHub profile for a custom date range. Whether you want to fill up your contribution graph or even make cool patterns and artwork.
 
 ## Getting Started
 
@@ -27,15 +27,18 @@ npm install
 npm run start
 ```
 
+4. **Open**
+Go to `http://localhost:3000` in your browser and choose a start date, an end date, and a commit count.
+
 ### Notes
 
-- The script creates commits dated over the last year and pushes **once at the end**.
-- Change the number of commits in `index.js` (`makeCommits(100)`).
+- The app creates commits in the chosen date range and pushes **once at the end**.
+- Adjust the number of commits from the web form.
 
 ## Room for Improvement
 
 - **Custom Patterns:** Experiment with different patterns on your contribution graph. Maybe spell out your name or create some cool designs.
-- **Density Control:** Play around with the number of commits per day to adjust the shades of green.
+- **Density Control:** Play around with the number of commits in the date range to adjust the shades of green.
 - **Input Strings:** Convert input strings to X-Y mapped contributions.
 
 ## npm Modules Used
