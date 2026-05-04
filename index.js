@@ -3,6 +3,7 @@ import { readFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { deleteHistoryEntry, generateCommits, getGenerationHistory } from "./lib/commit-service.js";
+import { generateArtRepo, getArtPresets } from "./lib/art-service.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -91,9 +92,14 @@ const server = http.createServer(async (request, response) => {
       return;
     }
 
+    if (url.pathname === "/art.js") {
+      await serveStaticFile(response, path.join(publicDir, "art.js"));
+      return;
+    }
+
     if (url.pathname === "/generation-state") {
       try {
-        const history = await getGenerationHistory();
+        const history = await getGenerationHistory({ kind: url.searchParams.get("kind") ?? undefined });
         sendJson(response, 200, { ok: true, state: history[0] ?? null });
       } catch (error) {
         sendJson(response, 500, {
@@ -106,8 +112,21 @@ const server = http.createServer(async (request, response) => {
 
     if (url.pathname === "/generation-history") {
       try {
-        const history = await getGenerationHistory();
+        const history = await getGenerationHistory({ kind: url.searchParams.get("kind") ?? undefined });
         sendJson(response, 200, { ok: true, history });
+      } catch (error) {
+        sendJson(response, 500, {
+          ok: false,
+          error: String(error?.message ?? error),
+        });
+      }
+      return;
+    }
+
+    if (url.pathname === "/art-presets") {
+      try {
+        const presets = await getArtPresets();
+        sendJson(response, 200, { ok: true, presets });
       } catch (error) {
         sendJson(response, 500, {
           ok: false,
@@ -127,6 +146,24 @@ const server = http.createServer(async (request, response) => {
         endDay: String(payload.endDay ?? "").trim(),
         count: Number(payload.count),
         messageBase: String(payload.messageBase ?? "update").trim() || "update",
+      });
+
+      sendJson(response, 200, result);
+    } catch (error) {
+      sendJson(response, 400, {
+        ok: false,
+        error: String(error?.message ?? error),
+      });
+    }
+    return;
+  }
+
+  if (request.method === "POST" && url.pathname === "/generate-art") {
+    try {
+      const payload = await readJsonBody(request);
+      const result = await generateArtRepo({
+        presetId: String(payload.presetId ?? "").trim(),
+        repoName: String(payload.repoName ?? "").trim(),
       });
 
       sendJson(response, 200, result);

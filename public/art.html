@@ -32,22 +32,15 @@
       }
 
       main {
-        width: min(1100px, calc(100% - 32px));
+        width: min(1200px, calc(100% - 32px));
         margin: 0 auto;
         padding: 40px 0 56px;
       }
 
-      .panel {
+      .hero {
         display: grid;
-        gap: 14px;
-        min-height: calc(100vh - 96px);
-        align-content: center;
-        padding: 28px;
-        border: 1px solid var(--panel-border);
-        border-radius: 28px;
-        background: var(--panel);
-        backdrop-filter: blur(16px);
-        box-shadow: var(--shadow);
+        gap: 12px;
+        margin-bottom: 24px;
       }
 
       .eyebrow {
@@ -70,9 +63,9 @@
         letter-spacing: -0.05em;
       }
 
-      p {
+      .subtitle {
         margin: 0;
-        max-width: 60ch;
+        max-width: 70ch;
         color: var(--muted);
         font-size: 1.02rem;
         line-height: 1.6;
@@ -91,17 +84,247 @@
         text-decoration: none;
         font-weight: 700;
       }
+
+      .grid {
+        display: grid;
+        grid-template-columns: 1fr 0.95fr;
+        gap: 18px;
+      }
+
+      @media (max-width: 960px) {
+        .grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .card {
+        border: 1px solid var(--panel-border);
+        border-radius: 24px;
+        background: var(--panel);
+        backdrop-filter: blur(16px);
+        box-shadow: var(--shadow);
+      }
+
+      .form-card,
+      .side-card,
+      .history-card {
+        padding: 24px;
+      }
+
+      .form-grid,
+      .history-list {
+        display: grid;
+        gap: 16px;
+      }
+
+      label {
+        display: grid;
+        gap: 8px;
+        font-size: 0.95rem;
+        font-weight: 700;
+      }
+
+      input,
+      select {
+        width: 100%;
+        padding: 13px 14px;
+        border: 1px solid rgba(15, 23, 42, 0.14);
+        border-radius: 14px;
+        background: rgba(255, 255, 255, 0.94);
+        color: var(--text);
+        font: inherit;
+      }
+
+      input:focus,
+      select:focus {
+        outline: 2px solid rgba(193, 84, 40, 0.28);
+        outline-offset: 2px;
+      }
+
+      .hint {
+        margin: 0;
+        color: var(--muted);
+        font-size: 0.9rem;
+        line-height: 1.5;
+      }
+
+      .actions,
+      .manage-actions {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+
+      .manage-actions {
+        justify-content: space-between;
+      }
+
+      button {
+        border: 0;
+        border-radius: 999px;
+        padding: 13px 18px;
+        background: linear-gradient(135deg, #c15428, #8f3f1f);
+        color: white;
+        font: inherit;
+        font-weight: 700;
+        cursor: pointer;
+      }
+
+      button:disabled {
+        cursor: wait;
+        opacity: 0.7;
+      }
+
+      .status {
+        min-height: 1.4em;
+        color: var(--muted);
+        font-size: 0.95rem;
+      }
+
+      .side-card {
+        display: grid;
+        gap: 14px;
+      }
+
+      .side-card h2,
+      .history-card h2 {
+        margin: 0;
+        font-size: 1.1rem;
+      }
+
+      pre {
+        margin: 0;
+        padding: 16px;
+        border-radius: 18px;
+        background: rgba(15, 23, 42, 0.94);
+        color: #f4d9cc;
+        overflow: auto;
+        min-height: 260px;
+      }
+
+      .history-card {
+        margin-top: 18px;
+        display: grid;
+        gap: 18px;
+      }
+
+      .history-item {
+        display: grid;
+        gap: 10px;
+        padding: 16px;
+        border-radius: 18px;
+        border: 1px solid rgba(15, 23, 42, 0.12);
+        background: rgba(255, 255, 255, 0.72);
+      }
+
+      .history-item-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+
+      .history-meta {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+
+      .tag {
+        display: inline-flex;
+        width: fit-content;
+        padding: 4px 10px;
+        border-radius: 999px;
+        background: rgba(15, 23, 42, 0.08);
+        font-size: 0.78rem;
+        font-weight: 700;
+        text-transform: uppercase;
+      }
+
+      .tag.active {
+        background: rgba(193, 84, 40, 0.12);
+        color: var(--art-strong);
+      }
+
+      .tag.reverted {
+        background: rgba(15, 139, 85, 0.12);
+        color: #0b6e43;
+      }
+
+      .danger-button {
+        background: linear-gradient(135deg, #8f3f1f, #592311);
+      }
+
+      .empty-state {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.6;
+      }
     </style>
+    <script src="/art.js" defer></script>
   </head>
   <body>
     <main>
-      <section class="panel">
+      <div class="hero">
         <span class="eyebrow">GoGreen Art</span>
-        <h1>Page séparée en préparation.</h1>
-        <p>
-          La partie Art est volontairement distincte de Faker. Elle sera construite après, avec sa propre logique et son propre design.
+        <h1>Choisis un preset 2023, puis dessine un vrai repo local.</h1>
+        <p class="subtitle">
+          Chaque preset produit des commits avec de vraies modifications de fichiers dans un dépôt local nommé comme tu veux, par défaut <strong>Art History GIT=</strong>.
+          Les dates essaient de reprendre l’historique 2023 disponible dans le dépôt source du projet, puis basculent sur un calendrier généré si besoin.
         </p>
         <a class="back-link" href="/">Retour à l’accueil</a>
+      </div>
+
+      <section class="grid">
+        <form class="card form-card" id="art-form">
+          <div class="form-grid">
+            <label>
+              Preset
+              <select id="presetId" name="presetId"></select>
+            </label>
+
+            <label>
+              Repo GitHub source 2023
+              <input id="sourceRepoUrl" name="sourceRepoUrl" type="url" placeholder="https://github.com/user/repo.git" required />
+            </label>
+
+            <label>
+              Nom du repo local
+              <input id="repoName" name="repoName" type="text" value="Art History GIT=" maxlength="80" required />
+            </label>
+
+            <label>
+              Repo GitHub destination
+              <input id="destinationRepoUrl" name="destinationRepoUrl" type="url" placeholder="https://github.com/user/Art-History-GIT.git" />
+            </label>
+
+            <p class="hint">
+              Le preset lit un vrai historique GitHub 2023, puis crée des commits réels dans le repo Art. Si tu renseignes un repo de destination, il sera poussé dessus.
+            </p>
+
+            <div class="actions">
+              <button id="submit-art" type="submit">Créer le repo Art</button>
+              <span class="status" id="art-status">Prêt.</span>
+            </div>
+          </div>
+        </form>
+
+        <aside class="card side-card">
+          <h2>Résultat</h2>
+          <p class="hint">Le retour de génération apparaît ici.</p>
+          <pre id="art-output">{}</pre>
+        </aside>
+      </section>
+
+      <section class="card history-card">
+        <div>
+          <span class="eyebrow">Historique Art</span>
+          <h2>Repo créés et supprimables</h2>
+          <p class="hint">Tu peux supprimer une génération Art si elle ne te convient pas.</p>
+        </div>
+        <div class="history-list" id="art-history"></div>
       </section>
     </main>
   </body>

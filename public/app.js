@@ -108,7 +108,7 @@ function formatHistoryEntry(entry) {
 
 async function loadGenerationHistory() {
   try {
-    const response = await fetch("/generation-history");
+    const response = await fetch("/generation-history?kind=faker");
     const payload = await response.json();
 
     if (response.ok && Array.isArray(payload.history)) {
