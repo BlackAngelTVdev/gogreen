@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>GoGreen Art</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --panel: rgba(255, 255, 255, 0.84);
+        --panel-border: rgba(15, 23, 42, 0.12);
+        --text: #0f172a;
+        --muted: #475569;
+        --art: #c15428;
+        --art-strong: #8f3f1f;
+        --shadow: 0 20px 60px rgba(15, 23, 42, 0.12);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        font-family: Arial, Helvetica, sans-serif;
+        color: var(--text);
+        background:
+          radial-gradient(circle at top left, rgba(193, 84, 40, 0.18), transparent 32%),
+          radial-gradient(circle at bottom right, rgba(193, 84, 40, 0.12), transparent 28%),
+          linear-gradient(135deg, #fbf3ef 0%, #f4ece5 100%);
+      }
+
+      main {
+        width: min(1100px, calc(100% - 32px));
+        margin: 0 auto;
+        padding: 40px 0 56px;
+      }
+
+      .panel {
+        display: grid;
+        gap: 14px;
+        min-height: calc(100vh - 96px);
+        align-content: center;
+        padding: 28px;
+        border: 1px solid var(--panel-border);
+        border-radius: 28px;
+        background: var(--panel);
+        backdrop-filter: blur(16px);
+        box-shadow: var(--shadow);
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        width: fit-content;
+        padding: 6px 12px;
+        border-radius: 999px;
+        background: rgba(193, 84, 40, 0.12);
+        color: var(--art-strong);
+        font-size: 0.85rem;
+        font-weight: 700;
+        letter-spacing: 0.02em;
+        text-transform: uppercase;
+      }
+
+      h1 {
+        margin: 0;
+        font-size: clamp(2.2rem, 5vw, 4.4rem);
+        line-height: 0.95;
+        letter-spacing: -0.05em;
+      }
+
+      p {
+        margin: 0;
+        max-width: 60ch;
+        color: var(--muted);
+        font-size: 1.02rem;
+        line-height: 1.6;
+      }
+
+      .back-link {
+        display: inline-flex;
+        width: fit-content;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 14px;
+        border-radius: 999px;
+        border: 1px solid var(--panel-border);
+        background: rgba(255, 255, 255, 0.8);
+        color: var(--text);
+        text-decoration: none;
+        font-weight: 700;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <section class="panel">
+        <span class="eyebrow">GoGreen Art</span>
+        <h1>Page séparée en préparation.</h1>
+        <p>
+          La partie Art est volontairement distincte de Faker. Elle sera construite après, avec sa propre logique et son propre design.
+        </p>
+        <a class="back-link" href="/">Retour à l’accueil</a>
+      </section>
+    </main>
+  </body>
+</html>

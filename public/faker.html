@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>GoGreen Faker</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --bg: #f5f3eb;
+        --panel: rgba(255, 255, 255, 0.84);
+        --panel-border: rgba(15, 23, 42, 0.12);
+        --text: #0f172a;
+        --muted: #475569;
+        --accent: #0f8b55;
+        --accent-strong: #0b6e43;
+        --shadow: 0 20px 60px rgba(15, 23, 42, 0.12);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        font-family: Arial, Helvetica, sans-serif;
+        color: var(--text);
+        background:
+          radial-gradient(circle at top left, rgba(15, 139, 85, 0.18), transparent 32%),
+          radial-gradient(circle at bottom right, rgba(15, 139, 85, 0.12), transparent 28%),
+          linear-gradient(135deg, #f7f7f1 0%, #eef5ef 100%);
+      }
+
+      main {
+        width: min(1100px, calc(100% - 32px));
+        margin: 0 auto;
+        padding: 40px 0 56px;
+      }
+
+      .hero {
+        display: grid;
+        gap: 12px;
+        margin-bottom: 24px;
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        width: fit-content;
+        padding: 6px 12px;
+        border-radius: 999px;
+        background: rgba(15, 139, 85, 0.12);
+        color: var(--accent-strong);
+        font-size: 0.85rem;
+        font-weight: 700;
+        letter-spacing: 0.02em;
+        text-transform: uppercase;
+      }
+
+      h1 {
+        margin: 0;
+        font-size: clamp(2.2rem, 5vw, 4.4rem);
+        line-height: 0.95;
+        letter-spacing: -0.05em;
+      }
+
+      .subtitle {
+        margin: 0;
+        max-width: 66ch;
+        color: var(--muted);
+        font-size: 1.02rem;
+        line-height: 1.6;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: 1.1fr 0.9fr;
+        gap: 18px;
+      }
+
+      @media (max-width: 860px) {
+        .grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .card {
+        border: 1px solid var(--panel-border);
+        border-radius: 24px;
+        background: var(--panel);
+        backdrop-filter: blur(16px);
+        box-shadow: var(--shadow);
+      }
+
+      .form-card,
+      .side-card {
+        padding: 24px;
+      }
+
+      .form-grid {
+        display: grid;
+        gap: 16px;
+      }
+
+      label {
+        display: grid;
+        gap: 8px;
+        font-size: 0.95rem;
+        font-weight: 700;
+      }
+
+      input {
+        width: 100%;
+        padding: 13px 14px;
+        border: 1px solid rgba(15, 23, 42, 0.14);
+        border-radius: 14px;
+        background: rgba(255, 255, 255, 0.94);
+        color: var(--text);
+        font: inherit;
+      }
+
+      input:focus {
+        outline: 2px solid rgba(15, 139, 85, 0.26);
+        outline-offset: 2px;
+      }
+
+      .hint {
+        margin: 0;
+        color: var(--muted);
+        font-size: 0.9rem;
+        line-height: 1.5;
+      }
+
+      .actions {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        flex-wrap: wrap;
+        margin-top: 4px;
+      }
+
+      button {
+        border: 0;
+        border-radius: 999px;
+        padding: 13px 18px;
+        background: linear-gradient(135deg, var(--accent), var(--accent-strong));
+        color: white;
+        font: inherit;
+        font-weight: 700;
+        cursor: pointer;
+      }
+
+      button:disabled {
+        cursor: wait;
+        opacity: 0.7;
+      }
+
+      .status {
+        min-height: 1.4em;
+        color: var(--muted);
+        font-size: 0.95rem;
+      }
+
+      .side-card {
+        display: grid;
+        gap: 14px;
+      }
+
+      .side-card h2 {
+        margin: 0;
+        font-size: 1.1rem;
+      }
+
+      pre {
+        margin: 0;
+        padding: 16px;
+        border-radius: 18px;
+        background: rgba(15, 23, 42, 0.94);
+        color: #d1fae5;
+        overflow: auto;
+        min-height: 260px;
+      }
+
+      .back-link {
+        display: inline-flex;
+        width: fit-content;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 14px;
+        border-radius: 999px;
+        border: 1px solid var(--panel-border);
+        background: rgba(255, 255, 255, 0.8);
+        color: var(--text);
+        text-decoration: none;
+        font-weight: 700;
+      }
+    </style>
+    <script src="/app.js" defer></script>
+  </head>
+  <body>
+    <main>
+      <div class="hero">
+        <span class="eyebrow">GoGreen Faker</span>
+        <h1>Choisis un dépôt, une plage de dates, puis lance.</h1>
+        <p class="subtitle">C’est la page active qui génère les commits. La page Art est séparée et arrivera après.</p>
+        <a class="back-link" href="/">Retour à l’accueil</a>
+      </div>
+
+      <section class="grid">
+        <form class="card form-card" id="commit-form">
+          <div class="form-grid">
+            <label>
+              URL du dépôt
+              <input id="repoUrl" name="repoUrl" type="text" placeholder="https://github.com/user/repo.git" required />
+            </label>
+
+            <label>
+              Date de début
+              <input id="startDay" name="startDay" type="date" required />
+            </label>
+
+            <label>
+              Date de fin
+              <input id="endDay" name="endDay" type="date" required />
+            </label>
+
+            <label>
+              Nombre de commits
+              <input id="count" name="count" type="number" min="1" max="365" value="10" required />
+            </label>
+
+            <label>
+              Message de base
+              <input id="message" name="message" type="text" value="update" maxlength="80" required />
+            </label>
+
+            <p class="hint">
+              Les commits sont répartis aléatoirement dans l'intervalle choisi sur le dépôt cible. Utilise une URL git locale ou distante.
+            </p>
+
+            <div class="actions">
+              <button id="submit" type="submit">Créer les commits</button>
+              <span class="status" id="status">Prêt.</span>
+            </div>
+          </div>
+        </form>
+
+        <aside class="card side-card">
+          <h2>Résultat</h2>
+          <p class="hint">La réponse du serveur apparaît ici après génération.</p>
+          <pre id="output">{}</pre>
+        </aside>
+      </section>
+    </main>
+  </body>
+</html>

@@ -76,6 +76,16 @@ const server = http.createServer(async (request, response) => {
       return;
     }
 
+    if (url.pathname === "/faker" || url.pathname === "/faker.html") {
+      await serveStaticFile(response, path.join(publicDir, "faker.html"));
+      return;
+    }
+
+    if (url.pathname === "/art" || url.pathname === "/art.html") {
+      await serveStaticFile(response, path.join(publicDir, "art.html"));
+      return;
+    }
+
     if (url.pathname === "/app.js") {
       await serveStaticFile(response, path.join(publicDir, "app.js"));
       return;

@@ -7,13 +7,14 @@
     <style>
       :root {
         color-scheme: light;
-        --bg: #f5f3eb;
         --panel: rgba(255, 255, 255, 0.84);
         --panel-border: rgba(15, 23, 42, 0.12);
         --text: #0f172a;
         --muted: #475569;
         --accent: #0f8b55;
         --accent-strong: #0b6e43;
+        --art: #c15428;
+        --art-strong: #8f3f1f;
         --shadow: 0 20px 60px rgba(15, 23, 42, 0.12);
       }
 
@@ -33,15 +34,114 @@
       }
 
       main {
-        width: min(1100px, calc(100% - 32px));
+        width: min(1200px, calc(100% - 32px));
         margin: 0 auto;
         padding: 40px 0 56px;
       }
 
-      .hero {
+      .landing-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 18px;
+      }
+
+      @media (max-width: 860px) {
+        .landing-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .split-card {
+        position: relative;
+        overflow: hidden;
+        display: grid;
+        align-content: end;
+        padding: 28px;
+        min-height: 320px;
+        text-decoration: none;
+        color: var(--text);
+        border: 1px solid var(--panel-border);
+        border-radius: 28px;
+        background: var(--panel);
+        box-shadow: var(--shadow);
+        transition: transform 180ms ease, box-shadow 180ms ease;
+      }
+
+      .split-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 28px 70px rgba(15, 23, 42, 0.16);
+      }
+
+      .split-card::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        opacity: 0.14;
+        pointer-events: none;
+      }
+
+      .split-card.faker::before {
+        background: linear-gradient(145deg, rgba(15, 139, 85, 0.92), rgba(15, 139, 85, 0.1));
+      }
+
+      .split-card.art::before {
+        background: linear-gradient(145deg, rgba(193, 84, 40, 0.92), rgba(193, 84, 40, 0.1));
+      }
+
+      .split-card-content {
+        position: relative;
+        z-index: 1;
         display: grid;
         gap: 12px;
-        margin-bottom: 24px;
+      }
+
+      .split-card h2 {
+        margin: 0;
+        font-size: clamp(2rem, 4vw, 3.8rem);
+        letter-spacing: -0.05em;
+      }
+
+      .split-card p {
+        margin: 0;
+        max-width: 34ch;
+        color: var(--muted);
+        line-height: 1.6;
+      }
+
+      .split-chip {
+        width: fit-content;
+        padding: 8px 12px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.72);
+        font-size: 0.8rem;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
+
+      .split-card.faker .split-chip {
+        color: var(--accent-strong);
+      }
+
+      .split-card.art .split-chip {
+        color: var(--art-strong);
+      }
+
+      .split-card .cta {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        width: fit-content;
+        margin-top: 4px;
+        padding: 12px 16px;
+        border-radius: 999px;
+        background: rgba(15, 23, 42, 0.94);
+        color: white;
+        font-weight: 700;
+      }
+
+      .split-card.art .cta {
+        background: rgba(193, 84, 40, 0.95);
       }
 
       .eyebrow {
@@ -72,172 +172,35 @@
         line-height: 1.6;
       }
 
-      .grid {
-        display: grid;
-        grid-template-columns: 1.1fr 0.9fr;
-        gap: 18px;
-      }
-
-      @media (max-width: 860px) {
-        .grid {
-          grid-template-columns: 1fr;
-        }
-      }
-
-      .card {
-        border: 1px solid var(--panel-border);
-        border-radius: 24px;
-        background: var(--panel);
-        backdrop-filter: blur(16px);
-        box-shadow: var(--shadow);
-      }
-
-      .form-card,
-      .side-card {
-        padding: 24px;
-      }
-
-      .form-grid {
-        display: grid;
-        gap: 16px;
-      }
-
-      label {
-        display: grid;
-        gap: 8px;
-        font-size: 0.95rem;
-        font-weight: 700;
-      }
-
-      input {
-        width: 100%;
-        padding: 13px 14px;
-        border: 1px solid rgba(15, 23, 42, 0.14);
-        border-radius: 14px;
-        background: rgba(255, 255, 255, 0.94);
-        color: var(--text);
-        font: inherit;
-      }
-
-      input:focus {
-        outline: 2px solid rgba(15, 139, 85, 0.26);
-        outline-offset: 2px;
-      }
-
-      .hint {
-        margin: 0;
-        color: var(--muted);
-        font-size: 0.9rem;
-        line-height: 1.5;
-      }
-
-      .actions {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        flex-wrap: wrap;
-        margin-top: 4px;
-      }
-
-      button {
-        border: 0;
-        border-radius: 999px;
-        padding: 13px 18px;
-        background: linear-gradient(135deg, var(--accent), var(--accent-strong));
-        color: white;
-        font: inherit;
-        font-weight: 700;
-        cursor: pointer;
-      }
-
-      button:disabled {
-        cursor: wait;
-        opacity: 0.7;
-      }
-
-      .status {
-        min-height: 1.4em;
-        color: var(--muted);
-        font-size: 0.95rem;
-      }
-
-      .side-card {
-        display: grid;
-        gap: 14px;
-      }
-
-      .side-card h2 {
-        margin: 0;
-        font-size: 1.1rem;
-      }
-
-      pre {
-        margin: 0;
-        padding: 16px;
-        border-radius: 18px;
-        background: rgba(15, 23, 42, 0.94);
-        color: #d1fae5;
-        overflow: auto;
-        min-height: 260px;
-      }
     </style>
-    <script src="/app.js" defer></script>
   </head>
   <body>
     <main>
       <div class="hero">
         <span class="eyebrow">goGreen local</span>
-        <h1>Choisis un dépôt, une plage de dates, puis lance.</h1>
-        <p class="subtitle">
-          Sélectionne un dépôt GitHub (ou local) et une plage de dates pour générer les commits automatiquement.
-        </p>
+        <h1>Choisis un univers.</h1>
+        <!-- <p class="subtitle">Deux pages séparées: GoGreen Faker pour l’outil déjà en place, et GoGreen Art pour la suite.</p> -->
       </div>
 
-      <section class="grid">
-        <form class="card form-card" id="commit-form">
-          <div class="form-grid">
-            <label>
-              URL du dépôt
-              <input id="repoUrl" name="repoUrl" type="text" placeholder="https://github.com/user/repo.git" required />
-            </label>
-
-            <label>
-              Date de début
-              <input id="startDay" name="startDay" type="date" required />
-            </label>
-
-            <label>
-              Date de fin
-              <input id="endDay" name="endDay" type="date" required />
-            </label>
-
-            <label>
-              Nombre de commits
-              <input id="count" name="count" type="number" min="1" max="365" value="10" required />
-            </label>
-
-            <label>
-              Message de base
-              <input id="message" name="message" type="text" value="update" maxlength="80" required />
-            </label>
-
-            <p class="hint">
-              Les commits sont répartis aléatoirement dans l'intervalle choisi sur le dépôt cible. Utilise une URL git locale ou distante.
-            </p>
-
-            <div class="actions">
-              <button id="submit" type="submit">Créer les commits</button>
-              <span class="status" id="status">Prêt.</span>
-            </div>
+      <div class="landing-grid">
+        <a class="split-card faker" href="/faker">
+          <div class="split-card-content">
+            <span class="split-chip">Mode actif</span>
+            <h2>GoGreen Faker</h2>
+            <p>Ouvre le générateur de commits que tu as déjà.</p>
+            <span class="cta">Entrer dans Faker</span>
           </div>
-        </form>
+        </a>
 
-        <aside class="card side-card">
-          <h2>Résultat</h2>
-          <p class="hint">La réponse du serveur apparaît ici après génération.</p>
-          <pre id="output">{}</pre>
-        </aside>
-      </section>
+        <a class="split-card art" href="/art">
+          <div class="split-card-content">
+            <span class="split-chip">Bientôt</span>
+            <h2>GoGreen Art</h2>
+            <p>La page Art sera faite après, mais la porte est déjà séparée.</p>
+            <span class="cta">Voir Art</span>
+          </div>
+        </a>
+      </div>
     </main>
   </body>
 </html>
