@@ -61,4 +61,4 @@ Huge thanks to [Akshay Saini](https://github.com/akshaymarch7) for the original 
 
 Thank you to everyone who contributes to the project.
 
-[![Contributors](https://contrib.rocks/image?repo=BlackAngelTVdev/gogreen)](https://github.com/BlackAngelTVdev/gogreen/graphs/contributors)
+![Contributors](https://contrib.rocks/image?repo=BlackAngelTVdev/gogreen)

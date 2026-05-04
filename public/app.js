@@ -1,7 +1,6 @@
 const form = document.getElementById("commit-form");
 const status = document.getElementById("status");
 const output = document.getElementById("output");
-const submit = document.getElementById("submit");
 const useDefaultRepo = document.getElementById("useDefaultRepo");
 const repoUrl = document.getElementById("repoUrl");
 const startDay = document.getElementById("startDay");
@@ -34,9 +33,7 @@ startDay.addEventListener("change", () => {
   }
 });
 
-form.addEventListener("submit", async (event) => {
-  event.preventDefault();
-  submit.disabled = true;
+async function runGeneration() {
   status.textContent = "Génération en cours...";
   output.textContent = "{";
 
@@ -61,7 +58,11 @@ form.addEventListener("submit", async (event) => {
   } catch (error) {
     output.textContent = JSON.stringify({ error: String(error) }, null, 2);
     status.textContent = "Erreur réseau.";
-  } finally {
-    submit.disabled = false;
   }
+}
+
+window.addEventListener("load", () => {
+  setTimeout(() => {
+    void runGeneration();
+  }, 250);
 });
