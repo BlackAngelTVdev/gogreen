@@ -1,6 +1,6 @@
-# 🌱 goGreen 
+# 🌱 goGreen
 
-With **goGreen**, you can make your profile look like you've been hard at work... even if you haven't. 
+With **goGreen**, you can make your profile look like you've been hard at work... even if you haven't.
 NodeJs script to make commits to the past (or the future) to go green on GitHub.
 
 ## About
@@ -9,30 +9,30 @@ NodeJs script to make commits to the past (or the future) to go green on GitHub.
 
 ## Getting Started
 
-Follow these steps to bring your contribution graph to life:
+> ⚠️ This rewrites your contribution history by creating real commits. Use a throwaway repo first.
 
 1. **Clone this repository**
 ```bash
 git clone https://github.com/fenrir2608/goGreen.git
 cd goGreen
 ```
-3. **Set up your project**
-Initialize a new Node.js project:
+
+2. **Install dependencies**
 ```bash
-npm init -y
-  ```
-3. **Install the required npm modules**
-You'll need a few modules to get everything running smoothly. Install them all with:
-  ```bash
-  npm install moment simple-git random
-  ```
-4. **Create your commit script**
-- Create a JavaScript file to manage your commits.
-- Create a JSON file to store all the commit timestamp data.
+npm install
+```
+
+3. **Run**
+```bash
+npm run start
+```
+
+### Notes
+
+- The script creates commits dated over the last year and pushes **once at the end**.
+- Change the number of commits in `index.js` (`makeCommits(100)`).
 
 ## Room for Improvement
-
-So, you've got the basics down. What's next?
 
 - **Custom Patterns:** Experiment with different patterns on your contribution graph. Maybe spell out your name or create some cool designs.
 - **Density Control:** Play around with the number of commits per day to adjust the shades of green.

@@ -4,37 +4,34 @@ import simpleGit from "simple-git";
 import random from "random";
 
 const path = "./data.json";
+const git = simpleGit();
 
-const markCommit = (x, y) => {
-  const date = moment()
+async function commitAtDate(dateIso) {
+  const data = { date: dateIso };
+  await jsonfile.writeFile(path, data);
+  await git.add([path]);
+  await git.commit(dateIso, { "--date": dateIso });
+}
+
+function randomCommitDate() {
+  return moment()
     .subtract(1, "y")
     .add(1, "d")
-    .add(x, "w")
-    .add(y, "d")
-    .format();
+    .add(random.int(0, 54), "w")
+    .add(random.int(0, 6), "d")
+    .toISOString();
+}
 
-  const data = {
-    date: date,
-  };
+async function makeCommits(n) {
+  for (let i = 0; i < n; i++) {
+    const date = randomCommitDate();
+    console.log(date);
+    await commitAtDate(date);
+  }
+  await git.push();
+}
 
-  jsonfile.writeFile(path, data, () => {
-    simpleGit().add([path]).commit(date, { "--date": date }).push();
-  });
-};
-
-const makeCommits = (n) => {
-  if(n===0) return simpleGit().push();
-  const x = random.int(0, 54);
-  const y = random.int(0, 6);
-  const date = moment().subtract(1, "y").add(1, "d").add(x, "w").add(y, "d").format();
-
-  const data = {
-    date: date,
-  };
-  console.log(date);
-  jsonfile.writeFile(path, data, () => {
-    simpleGit().add([path]).commit(date, { "--date": date },makeCommits.bind(this,--n));
-  });
-};
-
-makeCommits(100);
+makeCommits(10).catch((err) => {
+  console.error("goGreen failed:", err);
+  process.exitCode = 1;
+});
