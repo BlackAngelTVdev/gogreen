@@ -1,31 +1,15 @@
 const form = document.getElementById("commit-form");
 const status = document.getElementById("status");
 const output = document.getElementById("output");
-const useDefaultRepo = document.getElementById("useDefaultRepo");
 const repoUrl = document.getElementById("repoUrl");
 const startDay = document.getElementById("startDay");
 const endDay = document.getElementById("endDay");
 
 const today = new Date().toISOString().slice(0, 10);
-const defaultRepoUrl = "https://github.com/BlackAngelTVdev/gogreen.git";
+const defaultRepoUrl = "https://github.com/yourusername/exemple.git";
 repoUrl.value = defaultRepoUrl;
 startDay.value = today;
 endDay.value = today;
-
-function syncRepoField() {
-  repoUrl.readOnly = useDefaultRepo.checked;
-  repoUrl.value = useDefaultRepo.checked ? defaultRepoUrl : repoUrl.value.trim();
-}
-
-syncRepoField();
-
-useDefaultRepo.addEventListener("change", () => {
-  if (useDefaultRepo.checked && !repoUrl.value.trim()) {
-    repoUrl.value = defaultRepoUrl;
-  }
-
-  syncRepoField();
-});
 
 startDay.addEventListener("change", () => {
   if (endDay.value < startDay.value) {
@@ -34,8 +18,10 @@ startDay.addEventListener("change", () => {
 });
 
 async function runGeneration() {
+  const submitButton = document.getElementById("submit");
   status.textContent = "Génération en cours...";
   output.textContent = "{";
+  submitButton.disabled = true;
 
   try {
     const response = await fetch("/generate", {
@@ -58,11 +44,12 @@ async function runGeneration() {
   } catch (error) {
     output.textContent = JSON.stringify({ error: String(error) }, null, 2);
     status.textContent = "Erreur réseau.";
+  } finally {
+    submitButton.disabled = false;
   }
 }
 
-window.addEventListener("load", () => {
-  setTimeout(() => {
-    void runGeneration();
-  }, 250);
+form.addEventListener("submit", (event) => {
+  event.preventDefault();
+  void runGeneration();
 });
