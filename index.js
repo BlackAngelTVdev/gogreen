@@ -2,7 +2,7 @@ import http from "node:http";
 import { readFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { generateCommits } from "./lib/commit-service.js";
+import { deleteHistoryEntry, generateCommits, getGenerationHistory } from "./lib/commit-service.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -90,6 +90,32 @@ const server = http.createServer(async (request, response) => {
       await serveStaticFile(response, path.join(publicDir, "app.js"));
       return;
     }
+
+    if (url.pathname === "/generation-state") {
+      try {
+        const history = await getGenerationHistory();
+        sendJson(response, 200, { ok: true, state: history[0] ?? null });
+      } catch (error) {
+        sendJson(response, 500, {
+          ok: false,
+          error: String(error?.message ?? error),
+        });
+      }
+      return;
+    }
+
+    if (url.pathname === "/generation-history") {
+      try {
+        const history = await getGenerationHistory();
+        sendJson(response, 200, { ok: true, history });
+      } catch (error) {
+        sendJson(response, 500, {
+          ok: false,
+          error: String(error?.message ?? error),
+        });
+      }
+      return;
+    }
   }
 
   if (request.method === "POST" && url.pathname === "/generate") {
@@ -101,6 +127,23 @@ const server = http.createServer(async (request, response) => {
         endDay: String(payload.endDay ?? "").trim(),
         count: Number(payload.count),
         messageBase: String(payload.messageBase ?? "update").trim() || "update",
+      });
+
+      sendJson(response, 200, result);
+    } catch (error) {
+      sendJson(response, 400, {
+        ok: false,
+        error: String(error?.message ?? error),
+      });
+    }
+    return;
+  }
+
+  if (request.method === "POST" && url.pathname === "/delete-generated") {
+    try {
+      const payload = await readJsonBody(request);
+      const result = await deleteHistoryEntry({
+        generationId: String(payload.generationId ?? "").trim() || undefined,
       });
 
       sendJson(response, 200, result);

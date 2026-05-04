@@ -1,7 +1,49 @@
 {
-  "date": "2026-05-04T18:42:38.253Z",
-  "selectedDay": "2026-05-01 -> 2026-05-04",
-  "commitIndex": 50,
-  "totalCommits": 50,
-  "messageBase": "update"
+  "history": [
+    {
+      "id": "gen_20260504_154331",
+      "kind": "faker",
+      "repoUrl": "https://github.com/BlackAngelTVdev/gogreen.git",
+      "branchName": "main",
+      "baseCommit": "3cdbd031a471607ffc55aa6d2c3bcb7e8c589f2a",
+      "generatedHead": "2facf1b7b6f4a343543b3b28eb133527f1179617",
+      "startDay": "2026-05-04",
+      "endDay": "2026-05-04",
+      "count": 10,
+      "messageBase": "update",
+      "generatedAt": "2026-05-04T15:43:31.839Z",
+      "status": "reverted",
+      "revertedAt": "2026-05-04T15:43:43.939Z"
+    },
+    {
+      "id": "b368dd17-2444-438b-a35c-98aded99a796",
+      "kind": "faker",
+      "repoUrl": "https://github.com/BlackAngelTVdev/gogreen.git",
+      "branchName": "main",
+      "baseCommit": "1302a7ded84029de6f205a3bd97b794d42044ccf",
+      "generatedHead": "59abe83b05bf490e4398a82a86cd8243e2a3571e",
+      "startDay": "2026-05-04",
+      "endDay": "2026-05-04",
+      "count": 10,
+      "messageBase": "update",
+      "generatedAt": "2026-05-04T15:47:43.953Z",
+      "status": "reverted",
+      "revertedAt": "2026-05-04T15:47:54.683Z"
+    },
+    {
+      "id": "73ec67d9-c3bc-4e61-8152-51ef415faa71",
+      "kind": "faker",
+      "repoUrl": "https://github.com/BlackAngelTVdev/gogreen.git",
+      "branchName": "main",
+      "baseCommit": "1302a7ded84029de6f205a3bd97b794d42044ccf",
+      "generatedHead": "db83a61c6d38b12f8ac2200a5ecf75adc9150e2e",
+      "startDay": "2026-05-04",
+      "endDay": "2026-05-04",
+      "count": 10,
+      "messageBase": "update",
+      "generatedAt": "2026-05-04T15:48:18.584Z",
+      "status": "reverted",
+      "revertedAt": "2026-05-04T15:48:25.751Z"
+    }
+  ]
 }

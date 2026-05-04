@@ -166,6 +166,95 @@
         gap: 14px;
       }
 
+      .manage-card {
+        margin-top: 18px;
+        padding: 24px;
+        display: grid;
+        gap: 18px;
+      }
+
+      .manage-card h2 {
+        margin: 10px 0 0;
+        font-size: 1.35rem;
+      }
+
+      .manage-grid {
+        display: grid;
+        gap: 16px;
+      }
+
+      .manage-actions {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+
+      .danger-button {
+        background: linear-gradient(135deg, #c15428, #8f3f1f);
+      }
+
+      .history-card {
+        margin-top: 18px;
+        padding: 24px;
+        display: grid;
+        gap: 18px;
+      }
+
+      .history-list {
+        display: grid;
+        gap: 12px;
+      }
+
+      .history-item {
+        display: grid;
+        gap: 10px;
+        padding: 16px;
+        border-radius: 18px;
+        border: 1px solid rgba(15, 23, 42, 0.12);
+        background: rgba(255, 255, 255, 0.72);
+      }
+
+      .history-item-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+
+      .history-meta {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+
+      .tag {
+        display: inline-flex;
+        width: fit-content;
+        padding: 4px 10px;
+        border-radius: 999px;
+        background: rgba(15, 23, 42, 0.08);
+        font-size: 0.78rem;
+        font-weight: 700;
+        text-transform: uppercase;
+      }
+
+      .tag.active {
+        background: rgba(15, 139, 85, 0.12);
+        color: var(--accent-strong);
+      }
+
+      .tag.reverted {
+        background: rgba(193, 84, 40, 0.12);
+        color: var(--art-strong);
+      }
+
+      .history-item pre {
+        min-height: unset;
+        max-height: 240px;
+      }
+
       .side-card h2 {
         margin: 0;
         font-size: 1.1rem;
@@ -250,6 +339,18 @@
           <p class="hint">La réponse du serveur apparaît ici après génération.</p>
           <pre id="output">{}</pre>
         </aside>
+      </section>
+
+      <section class="card history-card">
+        <div>
+          <span class="eyebrow">Historique</span>
+          <h2>Supprimer un lot généré</h2>
+          <p class="hint">
+            Chaque génération est enregistrée ici. Tu peux supprimer le dernier lot actif d’un dépôt, et plus tard les entrées Art suivront le même système.
+          </p>
+        </div>
+
+        <div class="history-list" id="history-list"></div>
       </section>
     </main>
   </body>
