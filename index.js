@@ -86,6 +86,7 @@ const server = http.createServer(async (request, response) => {
     try {
       const payload = await readJsonBody(request);
       const result = await generateCommits({
+        repoUrl: String(payload.repoUrl ?? "").trim(),
         startDay: String(payload.startDay ?? "").trim(),
         endDay: String(payload.endDay ?? "").trim(),
         count: Number(payload.count),

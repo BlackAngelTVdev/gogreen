@@ -187,15 +187,20 @@
     <main>
       <div class="hero">
         <span class="eyebrow">goGreen local</span>
-        <h1>Choisis une plage de dates, puis lance la génération.</h1>
+        <h1>Choisis un dépôt, une plage de dates, puis lance.</h1>
         <p class="subtitle">
-          L'interface reste statique. Le moteur Git est séparé dans le back et peut être porté plus facilement vers un vrai mode serverless.
+          Sélectionne un dépôt GitHub (ou local) et une plage de dates pour générer les commits automatiquement.
         </p>
       </div>
 
       <section class="grid">
         <form class="card form-card" id="commit-form">
           <div class="form-grid">
+            <label>
+              URL du dépôt
+              <input id="repoUrl" name="repoUrl" type="text" placeholder="https://github.com/user/repo.git" required />
+            </label>
+
             <label>
               Date de début
               <input id="startDay" name="startDay" type="date" required />
@@ -217,7 +222,7 @@
             </label>
 
             <p class="hint">
-              Les commits sont répartis aléatoirement dans l'intervalle choisi. Le backend fait uniquement le travail Git, sans embarquer le front.
+              Les commits sont répartis aléatoirement dans l'intervalle choisi sur le dépôt cible. Utilise une URL git locale ou distante.
             </p>
 
             <div class="actions">

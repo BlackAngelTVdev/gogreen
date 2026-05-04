@@ -2,10 +2,12 @@ const form = document.getElementById("commit-form");
 const status = document.getElementById("status");
 const output = document.getElementById("output");
 const submit = document.getElementById("submit");
+const repoUrl = document.getElementById("repoUrl");
 const startDay = document.getElementById("startDay");
 const endDay = document.getElementById("endDay");
 
 const today = new Date().toISOString().slice(0, 10);
+repoUrl.value = "";
 startDay.value = today;
 endDay.value = today;
 
@@ -28,6 +30,7 @@ form.addEventListener("submit", async (event) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
+        repoUrl: repoUrl.value,
         startDay: startDay.value,
         endDay: endDay.value,
         count: Number(document.getElementById("count").value),

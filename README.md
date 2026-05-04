@@ -30,6 +30,12 @@ npm run start
 4. **Open**
 Go to `http://localhost:3000` in your browser and choose a start date, an end date, and a commit count.
 
+### Architecture
+
+- The front-end is static in `public/index.html` and `public/app.js`.
+- The Git generation logic lives in `lib/commit-service.js`.
+- `index.js` is only a thin local adapter that serves the static files and exposes the generation route.
+
 ### Notes
 
 - The app creates commits in the chosen date range and pushes **once at the end**.
@@ -45,7 +51,6 @@ Go to `http://localhost:3000` in your browser and choose a start date, an end da
 
 - [`moment`](https://www.npmjs.com/package/moment) - Handles date and time manipulation.
 - [`simple-git`](https://www.npmjs.com/package/simple-git) - For easy Git commands.
-- [`random`](https://www.npmjs.com/package/random) - To generate random numbers for the commits.
 
 ## Credits
 
